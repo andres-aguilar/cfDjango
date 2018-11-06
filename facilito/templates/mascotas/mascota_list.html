@@ -4,9 +4,8 @@
 
 {% block content %}
 
-    listado de mascotas
-
-    <table class="table">
+    <div class="container">
+    <table class="table table-striped ">
         <thead>
             <tr>
                 <th> ID </th>
@@ -15,6 +14,7 @@
                 <th> Edad </th>
                 <th> Fecha de rescate </th>
                 <th> Adoptante </th>
+                <th> Acctiones </th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +27,10 @@
                 <td> {{ mascota.edad_aproximada }} </td>
                 <td> {{ mascota.fecha_rescate }} </td>
                 <td> {{ mascota.persona.nombre }} {{ mascota.persona.apellidos }} </td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'mascotas:mascota_editar' mascota.id %}"> Editar </a>
+                    <a class="btn btn-danger" href="{% url 'mascotas:mascota_eliminar' mascota.id %}"> Eliminar </a>
+                </td>
             </tr>
             {% endfor %}
         {% else %}
@@ -34,5 +38,6 @@
         {% endif %}
         </tbody>
     </table>
+    </div>
 
 {% endblock content %}
