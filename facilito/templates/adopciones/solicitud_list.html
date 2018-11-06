@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Solicitudes {% endblock title %}
+
+{% block content %}
+    <div class="container">
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th> No. Solicitud </th>
+                <th> Adoptante </th>
+                <th> No. mascotas </th>
+                <th> Razones </th>
+                <th> Acciones </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if object_list %}
+            {% for solicitud in object_list %}
+            <tr>
+                <td> {{ solicitud.id }} </td>
+                <td> {{ solicitud.persona.nombre }} {{ solicitud.persona.apellidos }} </td>
+                <td> {{ solicitud.numero_mascotas }} </td>
+                <td> {{ solicitud.razones }} </td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'adopciones:solicitud_editar' solicitud.id %}"> Editar </a>
+                    <a class="btn btn-danger" href="{% url 'adopciones:solicitud_eliminar' solicitud.id %}"> Eliminar </a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <h1>No hay registros</h1>
+        {% endif %}
+        </tbody>
+    </table>
+    </div>
+{% endblock content %}
