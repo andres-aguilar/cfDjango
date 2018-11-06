@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth.views import login
+from django.contrib.auth.views import login, logout_then_login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', login, {'template_name': 'index.html'}, name='login'),
+    url(r'^accounts/login/', login, {'template_name': 'index.html'}, name='login1'),
+    url(r'^logout', logout_then_login, name='logout'),
     url(r'^mascota/', include('facilito.apps.mascotas.urls', namespace='mascotas')),
     url(r'^adopciones/', include('facilito.apps.adopciones.urls', namespace='adopciones')),
     url(r'^usuarios/', include('facilito.apps.usuarios.urls', namespace='usuarios')),

@@ -132,3 +132,4 @@ STATIC_URL = '/assets/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets'),]
 
 LOGIN_REDIRECT_URL = reverse_lazy('adopciones:solicitud_listar')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
