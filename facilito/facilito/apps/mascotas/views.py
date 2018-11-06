@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse_lazy
+
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
 from facilito.apps.mascotas.forms import MascotaForm
 from facilito.apps.mascotas.models import Mascota
 
@@ -13,7 +17,7 @@ def mascota_view(request):
 
         if form.is_valid():
             form.save()
-        return redirect('mascotas:index')
+        return redirect('mascotas:mascota_listar')
     else:
         form = MascotaForm()
 
@@ -50,3 +54,29 @@ def mascota_delete(request, id_mascota):
         return redirect(request, 'mascotas:mascota_listar')
     
     return render(request, 'mascotas/mascota_delete.html', {'mascota': mascota})
+
+
+# Vistas basadas en clases
+class MascotaList(ListView):
+    model = Mascota
+    template_name = 'mascotas/mascota_list.html'
+
+
+class MascotaCreate(CreateView):
+    model = Mascota
+    form_class = MascotaForm
+    template_name = 'mascotas/mascota_form.html'
+    success_url = reverse_lazy('mascotas:mascota_listar')
+
+
+class MascotaUpdate(UpdateView):
+    model = Mascota
+    form_class = MascotaForm
+    template_name = 'mascotas/mascota_form.html'
+    success_url = reverse_lazy('mascotas:mascota_listar')
+
+
+class MascotaDelete(DeleteView):
+    model = Mascota
+    template_name = 'mascotas/mascota_delete.html'
+    success_url = reverse_lazy('mascotas:mascota_listar')
