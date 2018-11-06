@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     # Local apps
     'facilito.apps.mascotas',
     'facilito.apps.adopciones',
+    'facilito.apps.usuarios',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -128,3 +130,5 @@ USE_TZ = True
 STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets'),]
+
+LOGIN_REDIRECT_URL = reverse_lazy('adopciones:solicitud_listar')
